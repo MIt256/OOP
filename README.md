@@ -18,4 +18,4 @@
 ###### [Скачать JavaFX](https://gluonhq.com/products/javafx/)
      
  ## Результат выполнения
-![alt text](https://github.com/MIt256/OOP_Lab/blob/master/result.JPG)
+![alt text](https://github.com/MIt256/OOP/blob/master/result.JPG)
