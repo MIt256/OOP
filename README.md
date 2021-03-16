@@ -6,5 +6,4 @@
  ## Запуск
    Использовался **Maven** и проблем со сборкой возникнуть не должно.
      
- ## Результат выполнения
-![alt text](https://github.com/MIt256/OOP/blob/master/result.JPG)
+
