@@ -9,8 +9,8 @@ public class Line extends Shape {
         this.brushSize = brushSize;
     }
 
-    @Override
-    public void draw(int[] points) {
+@Override
+    public void draw() {
 
     }
 }

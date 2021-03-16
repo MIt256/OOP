@@ -10,7 +10,7 @@ public class Polyline extends Shape {
     }
 
     @Override
-    public void draw(int[] points) {
+    public void draw() {
 
     }
 }

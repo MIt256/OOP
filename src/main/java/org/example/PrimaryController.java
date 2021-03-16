@@ -6,6 +6,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import org.example.shapes.Shape;
 
 import java.net.URL;
 import java.util.ResourceBundle;

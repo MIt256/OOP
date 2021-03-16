@@ -8,10 +8,11 @@ public class Polygon extends Shape {
         this.brushColor = brushColor;
         this.brushSize = brushSize;
         this.fillColor = fillColor;
+
     }
 
     @Override
-    public void draw(int[] points) {
+    public void draw() {
 
     }
 }

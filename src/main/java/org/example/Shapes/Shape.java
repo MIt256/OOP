@@ -2,12 +2,14 @@ package org.example.shapes;
 
 import javafx.scene.paint.Color;
 
-public class Shape {
+public  abstract class Shape {
     protected int brushSize;
     protected Color brushColor;
     protected Color fillColor;
+    //для сериализации и хранения точек
+    int[][] pointArr;
 
-    public void draw(int[] points) {
+    public void draw() {
 
     }
 }
