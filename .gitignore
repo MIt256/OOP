@@ -20,6 +20,7 @@ hs_err_pid*
 ## IntelliJ
 ##############################
 out/
+target/
 .target/
 .idea/
 .idea_modules/
