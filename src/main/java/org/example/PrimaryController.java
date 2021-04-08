@@ -197,7 +197,7 @@ public class PrimaryController {
                 gcDraw.setLineWidth(Double.parseDouble(penSize.getText()));
         }
         public void onCanvasClicked(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton() == MouseButton.PRIMARY){
+                if((mouseEvent.getButton() == MouseButton.PRIMARY)){
                         if (!isDraw) {
                                 currStep++;
                                 gcDraw.setFill(brushColor.getValue());
@@ -216,19 +216,16 @@ public class PrimaryController {
                                         parentFigureList.add(currStep-1,currentFigure);
                                         clearFigures();
 
-                                        //else parentFigureList.add(currStep+1,currentFigure) ;
-
                                 } else {
                                         currentFigure.paint(gcDraw);
                                         canvasPreview.setVisible(false);
-
                                         parentFigureList.add(currStep-1,currentFigure) ;
                                         clearFigures();
                                         isDraw = false;
                                 }
                         }
                 }
-                else {
+                else if ((mouseEvent.getButton() == MouseButton.SECONDARY) && (currentFigure.isPolyFigure())){
                         currentFigure.deleteLastPoint();
                         currentFigure.paint(gcDraw);
                         canvasPreview.setVisible(false);
