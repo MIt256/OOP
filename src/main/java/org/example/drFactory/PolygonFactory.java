@@ -6,7 +6,7 @@ import org.example.drShapes.Polygon;
 
 public class PolygonFactory implements FiguresFactory {
     @Override
-    public Polygon newFigure(GraphicsContext gc, Point2D startPoint){
-        return new Polygon(gc,startPoint,startPoint);
+    public Polygon newFigure(GraphicsContext gc, Point2D startPoint) {
+        return new Polygon(gc, startPoint, startPoint);
     }
 }

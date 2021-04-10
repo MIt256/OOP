@@ -6,7 +6,7 @@ import org.example.drShapes.Rectangle;
 
 public class RectangleFactory implements FiguresFactory {
     @Override
-    public Rectangle newFigure(GraphicsContext gc, Point2D startPoint){
-        return new Rectangle(gc,0,0,startPoint);
+    public Rectangle newFigure(GraphicsContext gc, Point2D startPoint) {
+        return new Rectangle(gc, 0, 0, startPoint);
     }
 }
