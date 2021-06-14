@@ -28,11 +28,11 @@
             <systemPath>${basedir}/Core/target/Core-1.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>org.example.plugins.trapezoid</groupId>
-            <artifactId>Trapezoid</artifactId>
+            <groupId>org.example.plugins.circle</groupId>
+            <artifactId>Circle</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/plugins/Trapezoid-1.0.jar</systemPath>
+            <systemPath>${basedir}/plugins/Circle-1.0.jar</systemPath>
         </dependency>
     </dependencies>
     <build>

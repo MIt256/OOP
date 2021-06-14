@@ -4,9 +4,9 @@ package org.example.drShapes;
 import javafx.scene.canvas.GraphicsContext;
 import org.example.core.Color;
 import org.example.core.Point;
-import org.example.core.ParentFigure;
+import org.example.core.Shape;
 
-public class Ellipse implements ParentFigure {
+public class Ellipse implements Shape {
 
     private final Color lineColor;
     private final boolean isLine;

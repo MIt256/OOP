@@ -7,9 +7,9 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import org.example.core.Color;
 import org.example.core.Point;
-import org.example.core.ParentFigure;
+import org.example.core.Shape;
 
-public class Polygon implements ParentFigure {
+public class Polygon implements Shape {
 
     private final Color lineColor;
     private final boolean isLine;

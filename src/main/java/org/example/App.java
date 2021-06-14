@@ -18,7 +18,6 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Maks Paint");
-
         stage.setMinWidth(1200);
         stage.setMinHeight(800);
         stage.show();

@@ -1,6 +1,5 @@
 package org.example;
 
-
 import java.io.File;
 import java.lang.module.Configuration;
 import java.lang.module.ModuleDescriptor;
@@ -11,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -25,12 +23,13 @@ import javafx.stage.FileChooser;
 import org.example.core.Color;
 import org.example.core.IService;
 import org.example.core.Point;
-import org.example.core.ParentFigure;
+import org.example.core.Shape;
 import org.example.core.ShapeFactory;
 import org.example.drFactory.EllipseFactory;
 import org.example.drFactory.PolygonFactory;
 import org.example.drFactory.PolylineFactory;
 import org.example.drFactory.RectangleFactory;
+
 
 public class PrimaryController {
 
@@ -49,28 +48,22 @@ public class PrimaryController {
     @FXML
     private Pane figuresPain;
 
-
-
     private ShapeFactory shapeFactory = new PolylineFactory();
     private final History history = new History();
     private boolean isShapeDrawing = false;
     private GraphicsContext gc;
-    private ParentFigure parentFigure;
-    private int Index;
-    private ParentFigure currentFigure;
-    private boolean isDraw = false;
+    private Shape shape;
 
 
     @FXML
     void initialize() {
         gc = canvas.getGraphicsContext2D();
         loadPlugins();
-        //
         tfLineWidth.setText("5");
-        //cbFill.setSelected(true);
-        //cbBorder.setSelected(true);
+        cbFill.setSelected(true);
+        cbBorder.setSelected(true);
         cpFillColor.setValue(javafx.scene.paint.Color.RED);
-        cpLineColor.setValue(javafx.scene.paint.Color.BLUE);
+        cpLineColor.setValue(javafx.scene.paint.Color.YELLOW);
     }
 
     public void btnLineClicked() {
@@ -89,6 +82,9 @@ public class PrimaryController {
 
     public void btnClearClicked() {
 
+        history.clearCanvas(gc);
+        history.clear();
+        isShapeDrawing = false;
     }
 
     @FXML
@@ -106,12 +102,12 @@ public class PrimaryController {
                     Color lineColor = new Color(cpLineColor.getValue());
                     Color fillColor  = new Color(cpFillColor.getValue());
 
-                    parentFigure = shapeFactory.createShape(lineColor, cbBorder.isSelected(),
+                    shape = shapeFactory.createShape(lineColor, cbBorder.isSelected(),
                         cbFill.isSelected(), fillColor, width);
 
-                    history.addShape(parentFigure);
+                    history.addShape(shape);
                 }
-                isShapeDrawing = parentFigure.draw(gc, newPoint);
+                isShapeDrawing = shape.draw(gc, newPoint);
 
 
             } else {
@@ -123,38 +119,58 @@ public class PrimaryController {
     @FXML
     void canvasMouseMoved(MouseEvent mouseEvent) {
 
+        if (isShapeDrawing) {
 
+            history.clearCanvas(gc);
+
+
+            history.drawPreview(gc);
+
+            shape.deleteLastPoint();
+
+
+            Point newPoint = new Point(mouseEvent.getX(), mouseEvent.getY());
+            shape.draw(gc, newPoint);
+        }
     }
 
     @FXML
-    void btnUndoClicked() { history.stepNext(gc);}
+    void btnUndoClicked() { history.undoShape(gc);}
 
     @FXML
-    void btnRedoClicked() { history.stepPrev(gc);}
+    void btnRedoClicked() { history.redoShape(gc);}
 
     @FXML
     void menuSaveAsClicked() {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Document");
-       FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Binary", "*.bin");
-       fileChooser.getExtensionFilters().add(extFilter);
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Binary", "*.bin");
+        fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(null);
 
+        if (file != null) {
+            history.serializeShapeList(file.toString());
+        }
     }
 
     @FXML
     void menuOpenClicked() {
 
-        FileChooser fileChooser = new FileChooser();fileChooser.setTitle("Open Document");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Document");
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Binary", "*.bin");
-       fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
 
-       }
+        if (file != null) {
+            history.deserializeShapeList(file.toString());
+            history.clearCanvas(gc);
+            history.drawAll(gc);
+        }
+    }
 
-
-       public void loadPlugins() {
+    public void loadPlugins() {
         Path pluginsDir = Paths.get("");
 
         ModuleFinder pluginsFinder = ModuleFinder.of(pluginsDir);
@@ -178,6 +194,7 @@ public class PrimaryController {
         List<IService>  services = IService.getServices(layer);
 
         for (IService service : services) {
+
             Button button = new Button();
             button.setOnAction(e -> {
                 shapeFactory = service.createFactory();
@@ -188,9 +205,9 @@ public class PrimaryController {
             button.setPrefHeight(38);
 
             figuresPain.getChildren().add(button);
+
         }
     }
-
 }
 
 
