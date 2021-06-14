@@ -13,26 +13,26 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>13</version>
+            <version>15.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>13</version>
+            <version>15.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.example.core</groupId>
             <artifactId>Core</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/Core/target/Core-1.0.jar</systemPath>
+            <systemPath>${basedir}/Core/target/Core.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.example.plugins.circle</groupId>
             <artifactId>Circle</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/plugins/Circle-1.0.jar</systemPath>
+            <systemPath>${basedir}/plugins/Circle.jar</systemPath>
         </dependency>
     </dependencies>
     <build>
