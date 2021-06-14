@@ -1,13 +1,18 @@
 package org.example.drFactory;
 
-import javafx.geometry.Point2D;
-import javafx.scene.canvas.GraphicsContext;
+
+import org.example.core.Color;
+import org.example.core.ParentFigure;
+import org.example.core.ShapeFactory;
 import org.example.drShapes.Polyline;
 
-public class PolylineFactory implements FiguresFactory {
-    @Override
-    public Polyline newFigure(GraphicsContext gc,Point2D startPoint){
-        return  new Polyline(gc,startPoint,startPoint);
-    }
+public class PolylineFactory implements ShapeFactory {
 
+    @Override
+    public ParentFigure createShape(Color lineColor, boolean isLine, boolean isFill, Color fillColor,
+                                    int lineWidth) {
+
+        return new Polyline(lineColor, isLine, isFill, fillColor, lineWidth);
+
+    }
 }

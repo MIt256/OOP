@@ -1,12 +1,18 @@
 package org.example.drFactory;
 
-import javafx.geometry.Point2D;
-import javafx.scene.canvas.GraphicsContext;
+
+import org.example.core.Color;
+import org.example.core.ParentFigure;
+import org.example.core.ShapeFactory;
 import org.example.drShapes.Rectangle;
 
-public class RectangleFactory implements FiguresFactory {
+public class RectangleFactory implements ShapeFactory {
+
     @Override
-    public Rectangle newFigure(GraphicsContext gc, Point2D startPoint) {
-        return new Rectangle(gc, 0, 0, startPoint);
+    public ParentFigure createShape(Color lineColor, boolean isLine, boolean isFill, Color fillColor,
+                                    int lineWidth) {
+
+        return new Rectangle(lineColor, isLine, isFill, fillColor, lineWidth);
+
     }
 }

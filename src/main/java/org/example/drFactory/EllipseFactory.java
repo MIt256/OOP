@@ -1,12 +1,17 @@
 package org.example.drFactory;
 
-import javafx.geometry.Point2D;
-import javafx.scene.canvas.GraphicsContext;
+import org.example.core.Color;
+import org.example.core.ParentFigure;
+import org.example.core.ShapeFactory;
 import org.example.drShapes.Ellipse;
 
-public class EllipseFactory implements FiguresFactory {
+public class EllipseFactory implements ShapeFactory {
+
     @Override
-    public Ellipse newFigure(GraphicsContext gc, Point2D startPoint){
-        return new Ellipse(gc,0,0,startPoint);
+    public ParentFigure createShape(Color lineColor, boolean isLine, boolean isFill, Color fillColor,
+                                    int lineWidth) {
+
+        return new Ellipse(lineColor, isLine, isFill, fillColor, lineWidth);
+
     }
 }

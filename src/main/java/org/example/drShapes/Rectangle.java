@@ -1,38 +1,80 @@
 package org.example.drShapes;
 
-import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import org.example.core.Color;
+import org.example.core.Point;
+import org.example.core.ParentFigure;
 
-public class Rectangle extends ParentFigure {
+public class Rectangle implements ParentFigure {
 
-    private double width;
-    private double height;
-    private Point2D topLeftCorner;
+    private final Color lineColor;
+    private final boolean isLine;
+    private final boolean isFill;
+    private final Color fillColor;
+    private final int lineWidth;
+    private Point firstPoint;
+    private Point secondPoint;
+    private boolean firstDrawCall = true;
 
-    public Rectangle(GraphicsContext gc,double height,double width,Point2D topLeftCorner){
-        super(gc);
-        polyFigure=false;
-        this.height=height;
-        this.width=width;
-        this.topLeftCorner=topLeftCorner;
+    public Rectangle(Color lineColor, boolean isLine, boolean isFill, Color fillColor, int lineWidth) {
+
+        this.lineColor = lineColor;
+        this.isLine = isLine;
+        this.isFill = isFill;
+        this.fillColor = fillColor;
+        this.lineWidth = lineWidth;
+
     }
 
     @Override
-    public void paint(GraphicsContext gc){
-        figureStyle(gc);
+    public boolean draw(GraphicsContext gc, Point point) {
 
-        gc.strokeRect(width > 0 ? topLeftCorner.getX() : topLeftCorner.getX() + width,
-                height > 0 ? topLeftCorner.getY() : topLeftCorner.getY() + height,
-                Math.abs(width), Math.abs(height));
+        if (!firstDrawCall) {
 
-        gc.fillRect(width > 0 ? topLeftCorner.getX() : topLeftCorner.getX() + width,
-                height > 0 ? topLeftCorner.getY() : topLeftCorner.getY() + height,
-                Math.abs(width), Math.abs(height));
+            secondPoint = point;
+            fill(gc);
 
+            return false;
+        }
+
+        firstPoint = point;
+        firstDrawCall = false;
+
+        return true;
     }
+
     @Override
-    public void saveLastPoint(Point2D newPoint){
-        height = newPoint.getY() - topLeftCorner.getY();
-        width = newPoint.getX() - topLeftCorner.getX();
+    public void fill(GraphicsContext gc) {
+
+        gc.setStroke(lineColor.getPaintColor());
+        gc.setLineWidth(lineWidth);
+        gc.setFill(fillColor.getPaintColor());
+
+        double width = Math.abs(secondPoint.getX() - firstPoint.getX());
+        double height = Math.abs(secondPoint.getY() - firstPoint.getY());
+
+        double startPointX = Math.min(firstPoint.getX(), secondPoint.getX());
+        double startPointY = Math.min(firstPoint.getY(), secondPoint.getY());
+
+        if (isFill) {
+
+            gc.fillRect(startPointX, startPointY, width, height);
+
+            if (isLine) {
+
+                gc.strokeRect(startPointX, startPointY, width, height);
+
+            }
+
+        } else {
+
+            gc.strokeRect(startPointX, startPointY, width, height);
+
+        }
+    }
+
+    @Override
+    public void deleteLastPoint() {
+
     }
 }

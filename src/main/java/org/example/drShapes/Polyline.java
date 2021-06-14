@@ -1,40 +1,67 @@
 package org.example.drShapes;
-import javafx.geometry.Point2D;
-import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
+import org.example.core.Color;
+import org.example.core.Point;
+import org.example.core.ParentFigure;
 
-public class Polyline extends ParentFigure {
 
-    private List<Point2D> listOfPoints;
+public class Polyline implements ParentFigure {
 
-    public Polyline(GraphicsContext gc, Point2D... listOfPoints){
-        super(gc);
-        polyFigure = true;
-        this.listOfPoints =new ArrayList<>();
-        this.listOfPoints.addAll(Arrays.asList(listOfPoints));
+    private final Color lineColor;
+    private final int lineWidth;
+    private final ArrayList<Point> pointsArr = new ArrayList<>();
+
+    public Polyline(Color lineColor,boolean isLine, boolean isFill, Color fillColor, int lineWidth) {
+
+        this.lineColor = lineColor;
+        this.lineWidth = lineWidth;
+
     }
+
     @Override
-    public void paint(GraphicsContext gc){
-        figureStyle(gc);
-        for (int count = 0; count < listOfPoints.size() - 1; count++) {
-            Point2D startPoint = listOfPoints.get(count);
-            Point2D secondPoint = listOfPoints.get(count + 1);
-            gc.strokeLine(startPoint.getX(), startPoint.getY(), secondPoint.getX(), secondPoint.getY());
+    public boolean draw(GraphicsContext gc, Point point) {
+
+        pointsArr.add(point);
+        fill(gc);
+
+        return true;
+    }
+
+    @Override
+    public void fill(GraphicsContext gc){
+
+        if (pointsArr.size() > 2 ) {
+
+            gc.setStroke(lineColor.getPaintColor());
+            gc.setLineWidth(lineWidth);
+            gc.setLineCap(StrokeLineCap.ROUND);
+            gc.setLineJoin(StrokeLineJoin.ROUND);
+
+            int nPoints = pointsArr.size();
+            double[] xPoints = new double[nPoints];
+            double[] yPoints = new double[nPoints];
+
+            for (int i = 0; i < pointsArr.size(); i++) {
+                xPoints[i] = pointsArr.get(i).getX();
+                yPoints[i] = pointsArr.get(i).getY();
+            }
+
+            gc.strokePolyline(xPoints, yPoints, nPoints);
         }
     }
+
     @Override
-    public void saveLastPoint(Point2D newPoint){
-        listOfPoints.set(listOfPoints.size()-1,newPoint);
+    public void deleteLastPoint() {
+
+        if (pointsArr.size() > 2) {
+
+            pointsArr.remove(pointsArr.size() - 1);
+
+        }
     }
-    @Override
-    public void addPoint(Point2D newPoint){
-        listOfPoints.add(newPoint);
-    }
-    @Override
-    public void deleteLastPoint(){
-        listOfPoints.remove(listOfPoints.size()-1);
-    }
+
 }

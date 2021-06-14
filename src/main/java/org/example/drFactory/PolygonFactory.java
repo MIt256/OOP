@@ -1,12 +1,17 @@
 package org.example.drFactory;
 
-import javafx.geometry.Point2D;
-import javafx.scene.canvas.GraphicsContext;
+import org.example.core.Color;
+import org.example.core.ParentFigure;
+import org.example.core.ShapeFactory;
 import org.example.drShapes.Polygon;
 
-public class PolygonFactory implements FiguresFactory {
+public class PolygonFactory implements ShapeFactory {
+
     @Override
-    public Polygon newFigure(GraphicsContext gc, Point2D startPoint) {
-        return new Polygon(gc, startPoint, startPoint);
+    public ParentFigure createShape(Color lineColor, boolean isLine, boolean isFill, Color fillColor,
+                                    int lineWidth) {
+
+        return new Polygon(lineColor, isLine, isFill, fillColor, lineWidth);
+
     }
 }
