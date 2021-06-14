@@ -47,10 +47,9 @@ public class PrimaryController {
     @FXML
     private TextField tfLineWidth;
     @FXML
-    private Pane menuPain;
+    private Pane figuresPain;
 
-    @FXML
-    private TextField step;
+
 
     private ShapeFactory shapeFactory = new PolylineFactory();
     private final History history = new History();
@@ -66,6 +65,12 @@ public class PrimaryController {
     void initialize() {
         gc = canvas.getGraphicsContext2D();
         loadPlugins();
+        //
+        tfLineWidth.setText("5");
+        //cbFill.setSelected(true);
+        //cbBorder.setSelected(true);
+        cpFillColor.setValue(javafx.scene.paint.Color.RED);
+        cpLineColor.setValue(javafx.scene.paint.Color.BLUE);
     }
 
     public void btnLineClicked() {
@@ -130,30 +135,26 @@ public class PrimaryController {
     @FXML
     void menuSaveAsClicked() {
 
-        //FileChooser fileChooser = new FileChooser();
-        //fileChooser.setTitle("Save Document");
-       // FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Binary", "*.bin");
-        //fileChooser.getExtensionFilters().add(extFilter);
-        //File file = fileChooser.showSaveDialog(null);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Document");
+       FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Binary", "*.bin");
+       fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showSaveDialog(null);
 
-        //дописать
     }
 
     @FXML
     void menuOpenClicked() {
 
-       // FileChooser fileChooser = new FileChooser();
-       // fileChooser.setTitle("Open Document");
-       // FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Binary", "*.bin");
-       // fileChooser.getExtensionFilters().add(extFilter);
-        //File file = fileChooser.showOpenDialog(null);
+        FileChooser fileChooser = new FileChooser();fileChooser.setTitle("Open Document");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Binary", "*.bin");
+       fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showOpenDialog(null);
 
-       //
-    }
+       }
 
 
-    //
-    public void loadPlugins() {
+       public void loadPlugins() {
         Path pluginsDir = Paths.get("");
 
         ModuleFinder pluginsFinder = ModuleFinder.of(pluginsDir);
@@ -183,16 +184,13 @@ public class PrimaryController {
             });
 
             button.setText(service.getShapeName());
-            button.setPrefWidth(50);
-            button.setPrefHeight(30);
+            button.setPrefWidth(70);
+            button.setPrefHeight(38);
 
-            menuPain.getChildren().add(button);
+            figuresPain.getChildren().add(button);
         }
     }
 
-    public void onCanvasMouseMoved(MouseEvent mouseEvent) {
-
-    }
 }
 
 
