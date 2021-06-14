@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="850.0" minWidth="1200.0" prefHeight="850.0" prefWidth="1200.0" style="-fx-background-color: #c2c2c2;" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="850.0" minWidth="1200.0" prefHeight="850.0" prefWidth="1200.0" style="-fx-background-color: #c2c2c2;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
    <children>
       <VBox layoutY="73.0" prefHeight="777.0" prefWidth="76.0" style="-fx-background-color: #474747; -fx-border-color: #303030; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="73.0">
          <children>
@@ -145,20 +145,19 @@
       </HBox>
       <Pane layoutX="76.0" layoutY="74.0" prefHeight="777.0" prefWidth="1126.0" style="-fx-background-color: fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0">
          <children>
-            <Canvas fx:id="canvasDraw" height="777.0" onMouseClicked="#onCanvasClicked" onMouseMoved="#onCanvasMouseMoved" width="1126.0" />
-            <Canvas fx:id="canvasPreview" height="777.0" layoutX="6.0" layoutY="-7.0" onMouseClicked="#onCanvasClicked" onMouseMoved="#onCanvasMouseMoved" width="1126.0" />
+            <Canvas fx:id="canvas" height="777.0" layoutX="6.0" layoutY="-7.0" onMouseClicked="#canvasMouseClicked" onMouseMoved="#onCanvasMouseMoved" width="1126.0" />
          </children>
       </Pane>
       <MenuBar layoutY="1.0" prefHeight="38.0" prefWidth="1200.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="FILE">
-            <items>
+         <menus>
+            <Menu mnemonicParsing="false" text="FILE">
+               <items>
                   <MenuItem fx:id="menuSave1" mnemonicParsing="false" onAction="#menuSaveAsClicked" text="SAVE" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="menuOpen" mnemonicParsing="false" onAction="#menuOpenClicked" text="OPEN" />
-            </items>
-          </Menu>
-        </menus>
+                  <MenuItem fx:id="menuOpen" mnemonicParsing="false" onAction="#menuOpenClicked" text="OPEN" />
+               </items>
+            </Menu>
+         </menus>
          <padding>
             <Insets left="10.0" top="5.0" />
          </padding>
