@@ -35,5 +35,9 @@
 
  ## Запуск
    Использовался **Maven** и проблем со сборкой возникнуть не должно.
-     
+  
+## Скрин:
+
+![image](https://user-images.githubusercontent.com/64751489/161446341-1aa92914-010f-4ae0-ad4f-f3f1ed655cbf.png)
+
 
